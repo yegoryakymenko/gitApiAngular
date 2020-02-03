@@ -1,0 +1,11 @@
+<div class="container" *ngIf="organization && !isLoading">
+  <mat-card>
+    <img [src]="organization.avatar_url" [alt]="organization.name">
+    <h3>{{organization.name}}</h3>
+    <p>{{organization.description ? organization.description : 'There is no description for this organization'}}</p>
+    <p>{{organization.location ? organization.location : 'There is no location for this organization'}}</p>
+    <button mat-button [routerLink]="[organization.login,'members']">View members</button>
+  </mat-card>
+</div>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>

@@ -1,0 +1,11 @@
+img {
+  max-width: 75px;
+}
+button {
+  background: #1E88E5;
+  color: #fff;
+}
+mat-spinner {
+  margin: 0 auto;
+  margin-top: 20px;
+}

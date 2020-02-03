@@ -1,0 +1,13 @@
+mat-form-field.name-field {
+  width: 225px;
+}
+form {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+button {
+  background: #1E88E5;
+  color: #fff;
+  margin-left: 10px;
+}

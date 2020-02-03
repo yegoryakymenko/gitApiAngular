@@ -1,0 +1,19 @@
+<form class="example-form" [formGroup]="searchForm" (ngSubmit)="onSearch(searchForm)">
+  <mat-form-field class="name-field">
+    <input
+      matInput
+      placeholder="Enter the organization name"
+      id="name"
+      type="text"
+      formControlName="name"
+    >
+  </mat-form-field>
+
+  <button
+    mat-button
+    type="submit"
+    color="indigo"
+    [disabled]="!searchForm.valid"
+  >Find</button>
+</form>
+<mat-divider></mat-divider>
