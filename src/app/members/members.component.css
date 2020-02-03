@@ -1,0 +1,23 @@
+img {
+  max-width: 275px;
+}
+button {
+  background: #1E88E5;
+  color: #fff;
+  margin-top: 7px;
+}
+.member-block {
+  margin-top: 15px;
+}
+mat-spinner {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.link {
+  display: block;
+  margin-top: 7px;
+  text-decoration: none;
+  color: #0288D1
+;
+}

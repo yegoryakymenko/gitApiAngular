@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="!members.length"></mat-spinner>
+<div class="container member-block" *ngFor="let member of members">
+  <mat-card>
+    <img [src]="member.avatar_url" [alt]="member.login">
+    <h3>{{member.login}}</h3>
+    <a class="link" [routerLink]="[member.login, 'followers']">Check Followers</a>
+    <a class="link" [routerLink]="[member.login, 'following']">Check Following</a>
+    <button mat-button [routerLink]="[member.login]">View page</button>
+  </mat-card>
+</div>
+

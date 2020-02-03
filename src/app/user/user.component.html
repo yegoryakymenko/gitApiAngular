@@ -1,0 +1,14 @@
+<mat-spinner *ngIf="!member"></mat-spinner>
+<div class="container member-block" *ngIf="member">
+  <mat-card class="user-info-container">
+    <div class="user-image">
+      <img [src]="member.avatar_url" [alt]="member.login">
+    </div>
+    <div class="user-info">
+      <h3>{{member.login}}</h3>
+      <p>{{member.name}}</p>
+      <p>Company: {{member.company ? member.company : 'is no setted for this user'}}</p>
+      <p>Blog: <a target="_blank" [href]="'https://' + member.blog">{{member.blog}}</a></p>
+    </div>
+  </mat-card>
+</div>
