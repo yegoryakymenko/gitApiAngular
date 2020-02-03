@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="!following.length"></mat-spinner>
 <div *ngIf="following.length">
-  <div class="container follower-block" *ngFor="let follow of following">
+  <div class="container following-block" *ngFor="let follow of following">
     <mat-card class="user-info-container">
       <img [src]="follow.avatar_url" [alt]="follow.login">
       <h3>{{follow.login}}</h3>
