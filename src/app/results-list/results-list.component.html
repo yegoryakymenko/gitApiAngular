@@ -4,7 +4,7 @@
     <h3>{{organization.name}}</h3>
     <p>{{organization.description ? organization.description : 'There is no description for this organization'}}</p>
     <p>{{organization.location ? organization.location : 'There is no location for this organization'}}</p>
-    <button mat-button [routerLink]="[organization.login,'members']">View members</button>
+    <button mat-button [routerLink]="[organization.login,'members']" (click)="onSearch(organization.login)">View members</button>
   </mat-card>
 </div>
 

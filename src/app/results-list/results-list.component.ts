@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../shared/http.service';
 import {Subscription} from 'rxjs';
+import {DataStorageService} from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-results-list',
@@ -9,25 +10,34 @@ import {Subscription} from 'rxjs';
 })
 export class ResultsListComponent implements OnInit, OnDestroy {
   organization = null;
-  isLoading = false;
   orgSub: Subscription;
+  isLoading = false;
   isLoadingSub: Subscription;
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.isLoadingSub = this.httpService.isLoading.subscribe(status => {
       this.isLoading = status;
     });
-    this.orgSub = this.httpService.organization.subscribe(org => {
-      this.organization = org;
-      console.log(this.organization);
-      this.isLoading = false;
-    });
+    const orgObj = this.dataStorageService.org;
+    this.orgSub = this.dataStorageService.organizationChanged.subscribe(
+      org => {
+        this.organization = org;
+        this.isLoading = false;
+      }
+    );
+    if (Object.entries(orgObj).length) {
+      this.organization = orgObj;
+    }
   }
 
   ngOnDestroy(): void {
     this.orgSub.unsubscribe();
     this.isLoadingSub.unsubscribe();
+  }
+
+  onSearch(name: string) {
+    this.httpService.getMembers(name);
   }
 
 }

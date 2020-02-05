@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../shared/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {DataStorageService} from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-followers',
@@ -9,15 +10,21 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./followers.component.css']
 })
 export class FollowersComponent implements OnInit, OnDestroy {
-  followers: [] = [];
+  followers: object[] = [];
   subscription: Subscription;
-  constructor(private httpService: HttpService, private route: ActivatedRoute) { }
+
+  constructor(private httpService: HttpService, private route: ActivatedRoute, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     const userName = this.route.snapshot.paramMap.get('id');
-    this.subscription = this.httpService.getFollowers(userName).subscribe(
+    const followObj = this.dataStorageService.follows;
+    if (Object.entries(followObj).length) {
+      this.followers = followObj;
+    } else {
+      this.httpService.getFollowers(userName);
+    }
+    this.subscription = this.dataStorageService.followersChanged.subscribe(
       (response: []) => {
-        console.log(response)
         this.followers = response;
       }
     );

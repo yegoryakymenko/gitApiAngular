@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpService} from '../shared/http.service';
 import {Subscription} from 'rxjs';
+import {DataStorageService} from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-user',
@@ -11,17 +12,27 @@ import {Subscription} from 'rxjs';
 export class UserComponent implements OnInit, OnDestroy {
   member = null;
   subscription: Subscription;
-  constructor(private route: ActivatedRoute, private httpService: HttpService) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    private httpService: HttpService,
+    private  dataStorageService: DataStorageService) {
+  }
 
   ngOnInit() {
     const member = this.route.snapshot.paramMap.get('id');
-    console.log(member);
-    this.subscription = this.httpService.getUser(member).subscribe(
-      response => {
-        console.log(response);
-        this.member = response;
+    const memberObj = this.dataStorageService.member;
+    if (Object.entries(memberObj).length) {
+      this.member = memberObj;
+    } else {
+        this.httpService.getUser(member);
+    }
+    this.subscription = this.dataStorageService.memberChanged.subscribe(
+      (currentMember: object) => {
+        this.member = currentMember;
       }
     );
+
   }
 
   ngOnDestroy(): void {

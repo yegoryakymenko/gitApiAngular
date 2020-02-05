@@ -8,10 +8,12 @@ import {Subscription} from 'rxjs';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit {
   searchForm: FormGroup;
   subscription: Subscription;
-  constructor(private httpService: HttpService) { }
+
+  constructor(private httpService: HttpService) {
+  }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
@@ -25,14 +27,6 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     const value = this.searchForm.get('name').value.trim().toLowerCase();
     this.httpService.isLoading.next(true);
-    this.subscription = this.httpService.getOrganization(value).subscribe(
-      response => {
-        this.httpService.organization.next(response);
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.httpService.getOrganization(value);
   }
 }
