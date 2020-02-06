@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
-import {DataStorageService} from './data-storage.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { DataStorageService } from './data-storage.service';
 @Injectable({providedIn: 'root'})
 export class HttpService {
   isLoading = new Subject<boolean>();

@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpService} from '../shared/http.service';
-import {Subscription} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from '../shared/http.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',

@@ -11,6 +11,7 @@ export class DataStorageService {
   followingChanged = new Subject<object[]>();
   followersChanged = new Subject<object[]>();
 
+  //
   private organization: object;
   private membersList: object[] = [];
   private currentMember: object;
