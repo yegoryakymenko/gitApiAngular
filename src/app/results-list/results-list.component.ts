@@ -18,13 +18,8 @@ export class ResultsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.orgSub = this.dataStorageService.organization.subscribe(
       org => {
-        if (org) {
-          this.isLoading = true;
-        }
-        setTimeout(() => {
-          this.organization = org;
-          this.isLoading = false;
-        }, 750);
+        this.organization = org;
+        this.isLoading = false;
       }
     );
   }

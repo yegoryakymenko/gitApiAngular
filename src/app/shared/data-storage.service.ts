@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,6 @@ export class DataStorageService {
   followingList: Observable<object[]> = this.followingSubject.asObservable();
   followersList: Observable<object[]> = this.followersSubject.asObservable();
 
-  constructor() { }
-
   setOrg(org: object) {
     this.organizationSubject.next(org);
   }
@@ -30,7 +28,6 @@ export class DataStorageService {
 
 
   setMember(member: object) {
-    console.log('member', member);
     this.memberSubject.next(member);
   }
 

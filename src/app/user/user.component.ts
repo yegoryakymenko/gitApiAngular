@@ -21,13 +21,11 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const member = this.route.snapshot.paramMap.get('id');
     this.subscription = this.dataStorageService.currentMember.subscribe(
       (currentMember: object) => {
         this.member = currentMember;
       }
     );
-
   }
 
   ngOnDestroy(): void {

@@ -12,7 +12,6 @@ export class HttpService {
   getOrganization(name: string) {
     this.http.get(`https://api.github.com/orgs/${name}`).subscribe(
       (response: object) => {
-        console.log('httpServiceResponse', response);
         this.dataStorageService.setOrg(response);
       }
     );
@@ -21,14 +20,13 @@ export class HttpService {
     this.http.get(`https://api.github.com/orgs/${orgName}/members`).subscribe(
       (response: object[]) => {
         this.dataStorageService.setMembers(response);
-      }
+;      }
     );
   }
   getMembersPage(orgName: string, page: number) {
     this.http.get(`https://api.github.com/orgs/${orgName}/members?page=${page}`).subscribe(
       (response: object[]) => {
         this.dataStorageService.setMembers(response);
-        console.log(response, 'response member');
       }
     );
   }
