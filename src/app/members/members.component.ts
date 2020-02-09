@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { HttpService } from '../shared/http.service';
@@ -11,25 +11,22 @@ import { DataStorageService } from '../shared/data-storage.service';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit, OnDestroy {
-  members: any = [];
-  subscription: Subscription;
+  members: object[] = [];
+  private subscription: Subscription;
   isLoading = true;
+  private number = 2;
   constructor(
     private httpService: HttpService,
     private route: ActivatedRoute,
-    private  dataStorageService: DataStorageService) { }
+    private  dataStorageService: DataStorageService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     const orgName = this.route.snapshot.paramMap.get('org');
-    const memList = this.dataStorageService.members;
-    if (Object.entries(memList).length) {
-      this.members = memList;
-      this.isLoading = false;
-    } else {
-      this.httpService.getMembers(orgName);
-    }
-    this.subscription = this.dataStorageService.membersChanged.subscribe(
+    this.subscription = this.dataStorageService.membersList.subscribe(
       (members: object[]) => {
+        console.log(members)
         this.isLoading = false;
         this.members = members;
       }
@@ -51,5 +48,6 @@ export class MembersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 
 }

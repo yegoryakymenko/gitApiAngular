@@ -26,7 +26,6 @@ export class FormComponent implements OnInit {
       return;
     }
     const value = this.searchForm.get('name').value.trim().toLowerCase();
-    this.httpService.isLoading.next(true);
     this.httpService.getOrganization(value);
   }
 }

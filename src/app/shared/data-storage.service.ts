@@ -1,67 +1,47 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
-  organizationChanged = new Subject<object>();
-  membersChanged = new Subject<object[]>();
-  memberChanged = new Subject<object>();
-  followingChanged = new Subject<object[]>();
-  followersChanged = new Subject<object[]>();
+  private organizationSubject = new BehaviorSubject<object>(null);
+  private membersSubject = new BehaviorSubject<object[]>([]);
+  private memberSubject = new BehaviorSubject<object>(null);
+  private followingSubject = new BehaviorSubject<object[]>([]);
+  private followersSubject = new BehaviorSubject<object[]>([]);
 
   //
-  private organization: object;
-  private membersList: object[] = [];
-  private currentMember: object;
-  private following: object[] = [];
-  private followed: object[] = [];
+  organization: Observable<object> = this.organizationSubject.asObservable();
+  membersList: Observable<object[]> = this.membersSubject.asObservable();
+  currentMember: Observable<object> = this.memberSubject.asObservable();
+  followingList: Observable<object[]> = this.followingSubject.asObservable();
+  followersList: Observable<object[]> = this.followersSubject.asObservable();
 
   constructor() { }
 
   setOrg(org: object) {
-    this.organization = org;
-    this.organizationChanged.next(this.organization);
-  }
-
-  get org() {
-    return {...this.organization};
+    this.organizationSubject.next(org);
   }
 
   setMembers(members: object[]) {
-    this.membersList = members;
-    this.membersChanged.next(this.membersList);
+    this.membersSubject.next(members);
   }
 
-  get members() {
-    return this.membersList.slice();
-  }
 
   setMember(member: object) {
-    this.currentMember = member;
-    this.memberChanged.next(this.currentMember);
+    console.log('member', member);
+    this.memberSubject.next(member);
   }
 
-  get member() {
-    return {...this.currentMember};
-  }
+
   setFollowers(list: object[]) {
-    this.following = list;
-    this.followersChanged.next(this.following);
+    this.followersSubject.next(list);
   }
 
-  get follows() {
-    return [...this.following];
-  }
 
   setFollowed(list: object[]) {
-    this.followed = list;
-    this.followingChanged.next(this.followed);
-  }
-
-  get followd() {
-    return [...this.followed];
+    this.followingSubject.next(list);
   }
 
 }

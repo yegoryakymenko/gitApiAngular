@@ -7,13 +7,15 @@ import {FollowersComponent} from './followers/followers.component';
 import {FollowingComponent} from './following/following.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full', component: HomeComponent},
-  {path: ':org/members', children: [
-      {path: '', pathMatch: 'full', component: MembersComponent},
-      {path: ':id', component: UserComponent},
-      {path: ':id/followers', component: FollowersComponent},
-      {path: ':id/following', component: FollowingComponent}
-    ]}
+  { path: '', redirectTo: '', pathMatch: 'full', component: HomeComponent },
+  {
+    path: ':org/members', children: [
+      { path: '', pathMatch: 'full', component: MembersComponent },
+      { path: ':id', component: UserComponent },
+      { path: ':id/followers', component: FollowersComponent },
+      { path: ':id/following', component: FollowingComponent }
+    ]
+  }
 ];
 
 @NgModule({

@@ -17,18 +17,12 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private httpService: HttpService,
-    private  dataStorageService: DataStorageService) {
+    private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
     const member = this.route.snapshot.paramMap.get('id');
-    const memberObj = this.dataStorageService.member;
-    if (Object.entries(memberObj).length) {
-      this.member = memberObj;
-    } else {
-        this.httpService.getUser(member);
-    }
-    this.subscription = this.dataStorageService.memberChanged.subscribe(
+    this.subscription = this.dataStorageService.currentMember.subscribe(
       (currentMember: object) => {
         this.member = currentMember;
       }

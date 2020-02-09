@@ -47,7 +47,6 @@ import { FollowingComponent } from './following/following.component';
     MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    RouterModule,
     AppRoutingModule
   ],
   providers: [

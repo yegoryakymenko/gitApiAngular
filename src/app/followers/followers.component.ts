@@ -14,17 +14,15 @@ export class FollowersComponent implements OnInit, OnDestroy {
   followers: object[] = [];
   subscription: Subscription;
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute, private dataStorageService: DataStorageService) { }
+  constructor(
+    private httpService: HttpService,
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService
+  ) { }
 
   ngOnInit() {
     const userName = this.route.snapshot.paramMap.get('id');
-    const followObj = this.dataStorageService.follows;
-    if (Object.entries(followObj).length) {
-      this.followers = followObj;
-    } else {
-      this.httpService.getFollowers(userName);
-    }
-    this.subscription = this.dataStorageService.followersChanged.subscribe(
+    this.subscription = this.dataStorageService.followersList.subscribe(
       (response: []) => {
         this.followers = response;
       }

@@ -13,28 +13,24 @@ export class ResultsListComponent implements OnInit, OnDestroy {
   organization = null;
   orgSub: Subscription;
   isLoading = false;
-  isLoadingSub: Subscription;
   constructor(private httpService: HttpService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    this.isLoadingSub = this.httpService.isLoading.subscribe(status => {
-      this.isLoading = status;
-    });
-    const orgObj = this.dataStorageService.org;
-    this.orgSub = this.dataStorageService.organizationChanged.subscribe(
+    this.orgSub = this.dataStorageService.organization.subscribe(
       org => {
-        this.organization = org;
-        this.isLoading = false;
+        if (org) {
+          this.isLoading = true;
+        }
+        setTimeout(() => {
+          this.organization = org;
+          this.isLoading = false;
+        }, 750);
       }
     );
-    if (Object.entries(orgObj).length) {
-      this.organization = orgObj;
-    }
   }
 
   ngOnDestroy(): void {
     this.orgSub.unsubscribe();
-    this.isLoadingSub.unsubscribe();
   }
 
   onSearch(name: string) {
