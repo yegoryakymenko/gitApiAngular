@@ -23,8 +23,10 @@ export class MembersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.dataStorageService.membersList.subscribe(
       (members: object[]) => {
-        this.isLoading = false;
         this.members = members;
+        if (this.members.length) {
+          this.isLoading = false;
+        }
       });
   }
 
