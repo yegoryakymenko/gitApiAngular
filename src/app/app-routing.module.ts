@@ -1,21 +1,11 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {MembersComponent} from './members/members.component';
-import {HomeComponent} from './home/home.component';
-import {UserComponent} from './user/user.component';
-import {FollowersComponent} from './followers/followers.component';
-import {FollowingComponent} from './following/following.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full', component: HomeComponent },
-  {
-    path: ':org/members', children: [
-      { path: '', pathMatch: 'full', component: MembersComponent },
-      { path: ':id', component: UserComponent },
-      { path: ':id/followers', component: FollowersComponent },
-      { path: ':id/following', component: FollowingComponent }
-    ]
-  }
+  { path: ':org/members', loadChildren: './members/members.module#MembersModule' },
 ];
 
 @NgModule({
@@ -23,3 +13,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+
+

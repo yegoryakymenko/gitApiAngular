@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-import { HttpService } from '../shared/http.service';
-import { DataStorageService } from '../shared/data-storage.service';
+import { HttpService } from '../../shared/http.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-following',
