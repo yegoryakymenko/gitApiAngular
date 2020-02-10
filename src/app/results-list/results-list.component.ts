@@ -12,14 +12,12 @@ import { DataStorageService } from '../shared/data-storage.service';
 export class ResultsListComponent implements OnInit, OnDestroy {
   organization = null;
   orgSub: Subscription;
-  isLoading = false;
   constructor(private httpService: HttpService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.orgSub = this.dataStorageService.organization.subscribe(
       org => {
         this.organization = org;
-        this.isLoading = false;
       }
     );
   }
